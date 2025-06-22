@@ -1,7 +1,7 @@
 import {INodeType, INodeTypeDescription, NodeConnectionType} from 'n8n-workflow';
 import {Operations} from './Operations';
 import {Fields} from './Fields';
-import {getBots} from './loadOptions'
+import {getBots, getAllDatapools, getSingleDatapool} from './loadOptions'
 
 export class BotCity implements INodeType {
 	description: INodeTypeDescription = {
@@ -48,6 +48,11 @@ export class BotCity implements INodeType {
 						value: 'Orchestrator',
 						description: 'Start, Stop or List an execution',
 					},
+					{
+						name: 'Datapool',
+						value: 'Datapool',
+						description: 'Datapool manager',
+					},
 				],
 				default: 'Orchestrator',
 			},
@@ -60,6 +65,8 @@ export class BotCity implements INodeType {
 	methods = {
 		loadOptions: {
 			getBots,
+			getAllDatapools,
+			getSingleDatapool
 		},
 	};
 }

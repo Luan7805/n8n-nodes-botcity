@@ -7,7 +7,7 @@ import type {
 	IRequestOptions,
 	JsonObject,
 } from 'n8n-workflow';
-import { NodeApiError } from 'n8n-workflow';
+import {NodeApiError} from 'n8n-workflow';
 
 export interface BodyWithPagination extends IDataObject {
 	size: number,
@@ -50,7 +50,7 @@ export async function bcApiRequestAllItems(
 	propertyName: string,
 	method: IHttpRequestMethods,
 	endpoint: string,
-	body: BodyWithPagination = { size: 50, page: 0 },
+	body: BodyWithPagination = {size: 50, page: 0},
 	query: IDataObject = {},
 	maxPages: number = 100
 ): Promise<any> {

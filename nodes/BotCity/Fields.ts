@@ -128,4 +128,100 @@ const Manage: INodeProperties[] = [
 	},
 ];
 
-export const Fields: INodeProperties[] = [...Start, ...Manage];
+const DatapoolName: INodeProperties[] = [
+	{
+		displayName: 'Datapool',
+		name: 'datapool',
+		description: 'Name of datapool',
+		type: 'options',
+		typeOptions: {
+			loadOptionsMethod: 'getAllDatapools',
+		},
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['Datapool'],
+				operation: ['addItem', 'listItems', 'deleteItem'],
+			},
+		},
+		default: '',
+	},
+];
+
+const DatapoolItemId: INodeProperties[] = [
+	{
+		displayName: 'Item ID',
+		name: 'itemId',
+		description: 'ID of item',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['Datapool'],
+				operation: ['deleteItem'],
+			},
+		},
+
+		default: '',
+	},
+];
+
+const AddItemToDatapool: INodeProperties[] = [
+	{
+		displayName: 'Values',
+		name: 'values',
+		placeholder: 'Add Value',
+		type: 'fixedCollection',
+		typeOptions: {
+			multipleValueButtonText: 'Add Value',
+			multipleValues: true,
+		},
+		displayOptions: {
+			show: {
+				resource: ['Datapool'],
+				operation: ['addItem'],
+			},
+		},
+		default: {},
+		options: [
+			{
+				displayName: 'Values',
+				name: 'value',
+				values: [
+					{
+						displayName: 'Label',
+						name: 'label',
+						type: 'options',
+						description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/" target="_blank">expression</a>',
+						typeOptions: {
+							loadOptionsMethod: 'getSingleDatapool',
+							loadOptionsDependsOn: ['datapool'],
+						},
+						default: [],
+					},
+					{
+						displayName: 'Value',
+						name: 'value',
+						type: 'string',
+						routing: {
+							send: {
+								value: '={{$value}}',
+								property: '=values.{{$parent.label}}',
+								type: 'body',
+							},
+						},
+						default: '',
+					},
+				],
+			},
+		],
+	},
+];
+
+export const Fields: INodeProperties[] = [
+	...Start,
+	...Manage,
+	...DatapoolName,
+	...DatapoolItemId,
+	...AddItemToDatapool
+];
