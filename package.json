@@ -35,7 +35,9 @@
     "credentials": [
       "dist/credentials/BotCityApi.credentials.js"
     ],
-    "nodes": []
+    "nodes": [
+      "dist/nodes/BotCity/BotCity.node.js"
+    ]
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^8.29.0",

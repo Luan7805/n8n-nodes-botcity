@@ -1,8 +1,7 @@
-import {
-	INodeType,
-	INodeTypeDescription,
-	NodeConnectionType,
-} from 'n8n-workflow';
+import {INodeType, INodeTypeDescription, NodeConnectionType} from 'n8n-workflow';
+import {Operations} from './Operations';
+import {Fields} from './Fields';
+import {getBots} from './loadOptions'
 
 export class BotCity implements INodeType {
 	description: INodeTypeDescription = {
@@ -38,8 +37,29 @@ export class BotCity implements INodeType {
 		},
 
 		properties: [
+			{
+				displayName: 'Resource',
+				name: 'resource',
+				type: 'options',
+				noDataExpression: true,
+				options: [
+					{
+						name: 'Execution Orchestrator',
+						value: 'Orchestrator',
+						description: 'Start, Stop or List an execution',
+					},
+				],
+				default: 'Orchestrator',
+			},
 
+			...Operations,
+			...Fields,
 		],
 	};
 
+	methods = {
+		loadOptions: {
+			getBots,
+		},
+	};
 }
