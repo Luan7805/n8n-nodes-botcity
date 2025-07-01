@@ -2,9 +2,9 @@ import {INodeProperties} from 'n8n-workflow';
 
 const Start: INodeProperties[] = [
 	{
-		displayName: 'Name',
+		displayName: 'Name or ID',
 		name: 'activityLabel',
-		description: 'Name of the bot you want to start',
+		description: 'Name of the bot you want to start. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 		type: 'options',
 		typeOptions: {
 			loadOptionsMethod: 'getBots',
@@ -47,7 +47,7 @@ const Start: INodeProperties[] = [
 	{
 		displayName: 'Test Task',
 		name: 'test',
-		description: 'Check if is a test task',
+		description: 'Whether it\'s a test task, you need to check this',
 		type: 'boolean',
 		required: true,
 		displayOptions: {
@@ -68,7 +68,6 @@ const Start: INodeProperties[] = [
 		displayName: 'Params',
 		name: 'botInput',
 		type: 'fixedCollection',
-		required: false,
 		displayOptions: {
 			show: {
 				resource: ['Orchestrator'],
@@ -85,16 +84,16 @@ const Start: INodeProperties[] = [
 				displayName: 'Value',
 				values: [
 					{
-						displayName: 'Param name',
+						displayName: 'Param Name or ID',
 						name: 'varName',
 						type: 'options',
-						description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/" target="_blank">expression</a>',
+						description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/" target="_blank">expression</a>. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 						required: true,
 						typeOptions: {
 							loadOptionsMethod: 'getBotParams',
 							loadOptionsDependsOn: ['activityLabel'],
 						},
-						default: [],
+						default: '',
 					},
 					{
 						displayName: 'Value',
@@ -139,7 +138,6 @@ const Days: INodeProperties[] = [
 		name: 'days',
 		description: 'Relative number of days to fetch data',
 		type: 'number',
-		required: false,
 		displayOptions: {
 			show: {
 				resource: ['Orchestrator'],
@@ -158,9 +156,9 @@ const Days: INodeProperties[] = [
 
 const DatapoolName: INodeProperties[] = [
 	{
-		displayName: 'Datapool',
+		displayName: 'Datapool Name or ID',
 		name: 'datapool',
-		description: 'Name of datapool',
+		description: 'Name of datapool. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 		type: 'options',
 		typeOptions: {
 			loadOptionsMethod: 'getAllDatapools',
@@ -217,15 +215,15 @@ const AddItemToDatapool: INodeProperties[] = [
 				name: 'value',
 				values: [
 					{
-						displayName: 'Label',
+						displayName: 'Label Name or ID',
 						name: 'label',
 						type: 'options',
-						description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/" target="_blank">expression</a>',
+						description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/" target="_blank">expression</a>. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 						typeOptions: {
 							loadOptionsMethod: 'getSingleDatapool',
 							loadOptionsDependsOn: ['datapool'],
 						},
-						default: [],
+						default: '',
 					},
 					{
 						displayName: 'Value',

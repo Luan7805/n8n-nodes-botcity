@@ -13,46 +13,6 @@ export const Operations: INodeProperties[] = [
 		},
 		options: [
 			{
-				name: 'Start',
-				value: 'start',
-				action: 'Start a new bot',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '/api/v2/task',
-					},
-				},
-			},
-			{
-				name: 'Stop queue execution',
-				value: 'cancel',
-				action: 'Cancel an execution',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '=/api/v2/task/{{$parameter.executionID}}',
-						body: {
-							state: "CANCELED"
-						}
-					},
-				},
-			},
-			{
-				name: 'Stop running execution',
-				value: 'stop',
-				action: 'Stop an execution',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '=/api/v2/task/{{$parameter.executionID}}',
-						body: {
-							interrupted: true,
-							killed: true
-						}
-					},
-				},
-			},
-			{
 				name: 'Get',
 				value: 'get',
 				action: 'Get execution details',
@@ -64,9 +24,9 @@ export const Operations: INodeProperties[] = [
 				},
 			},
 			{
-				name: 'List all executions',
+				name: 'Get Many',
 				value: 'getAll',
-				action: 'Get all executions details',
+				action: 'Get many executions details',
 				routing: {
 					request: {
 						method: 'GET',
@@ -104,6 +64,46 @@ export const Operations: INodeProperties[] = [
 					},
 				},
 			},
+			{
+				name: 'Start',
+				value: 'start',
+				action: 'Start a new bot',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '/api/v2/task',
+					},
+				},
+			},
+			{
+				name: 'Stop Queue Execution',
+				value: 'cancel',
+				action: 'Cancel an execution',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/api/v2/task/{{$parameter.executionID}}',
+						body: {
+							state: "CANCELED"
+						}
+					},
+				},
+			},
+			{
+				name: 'Stop Running Execution',
+				value: 'stop',
+				action: 'Stop an execution',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '=/api/v2/task/{{$parameter.executionID}}',
+						body: {
+							interrupted: true,
+							killed: true
+						}
+					},
+				},
+			},
 
 		],
 		default: 'start',
@@ -122,7 +122,7 @@ export const Operations: INodeProperties[] = [
 		},
 		options: [
 			{
-				name: 'Add item',
+				name: 'Add Item',
 				value: 'addItem',
 				action: 'Add item to datapool',
 				routing: {
@@ -133,7 +133,7 @@ export const Operations: INodeProperties[] = [
 				},
 			},
 			{
-				name: 'List datapool items',
+				name: 'List Datapool Items',
 				value: 'listItems',
 				action: 'List datapool items',
 				routing: {
@@ -170,7 +170,7 @@ export const Operations: INodeProperties[] = [
 				},
 			},
 			{
-				name: 'Delete datapool item',
+				name: 'Delete Datapool Item',
 				value: 'deleteItem',
 				action: 'Delete an item from datapool',
 				routing: {

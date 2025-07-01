@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-botcity",
   "version": "0.0.1",
-  "description": "",
+  "description": "N8N Node for botcity.",
   "keywords": [
     "n8n-community-node-package",
     "botcity"

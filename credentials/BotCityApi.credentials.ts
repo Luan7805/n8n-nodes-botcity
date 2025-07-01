@@ -11,7 +11,8 @@ import type {
 export class BotCityApi implements ICredentialType {
 	name = 'botCityApi';
 
-	displayName = 'BotCity Api';
+	displayName = 'BotCity API';
+	documentationUrl = 'https://developers.botcity.dev/v3/api-docs';
 
 	properties: INodeProperties[] = [
 		{
