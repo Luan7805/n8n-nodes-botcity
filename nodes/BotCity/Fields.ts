@@ -85,11 +85,16 @@ const Start: INodeProperties[] = [
 				displayName: 'Value',
 				values: [
 					{
-						displayName: 'varName',
+						displayName: 'Param name',
 						name: 'varName',
-						type: 'string',
+						type: 'options',
+						description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/" target="_blank">expression</a>',
 						required: true,
-						default: '',
+						typeOptions: {
+							loadOptionsMethod: 'getBotParams',
+							loadOptionsDependsOn: ['activityLabel'],
+						},
+						default: [],
 					},
 					{
 						displayName: 'Value',
@@ -125,6 +130,29 @@ const Manage: INodeProperties[] = [
 			},
 		},
 		default: '',
+	},
+];
+
+const Days: INodeProperties[] = [
+	{
+		displayName: 'Days',
+		name: 'days',
+		description: 'Relative number of days to fetch data',
+		type: 'number',
+		required: false,
+		displayOptions: {
+			show: {
+				resource: ['Orchestrator'],
+				operation: ['getAll'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'days',
+				type: 'query',
+			},
+		},
+		default: 7,
 	},
 ];
 
@@ -221,6 +249,7 @@ const AddItemToDatapool: INodeProperties[] = [
 export const Fields: INodeProperties[] = [
 	...Start,
 	...Manage,
+	...Days,
 	...DatapoolName,
 	...DatapoolItemId,
 	...AddItemToDatapool

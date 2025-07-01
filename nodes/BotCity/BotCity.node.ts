@@ -1,7 +1,7 @@
 import {INodeType, INodeTypeDescription, NodeConnectionType} from 'n8n-workflow';
 import {Operations} from './Operations';
 import {Fields} from './Fields';
-import {getBots, getAllDatapools, getSingleDatapool} from './loadOptions'
+import {getBots, getBotParams, getAllDatapools, getSingleDatapool} from './loadOptions'
 
 export class BotCity implements INodeType {
 	description: INodeTypeDescription = {
@@ -65,6 +65,7 @@ export class BotCity implements INodeType {
 	methods = {
 		loadOptions: {
 			getBots,
+			getBotParams,
 			getAllDatapools,
 			getSingleDatapool
 		},

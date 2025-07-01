@@ -16,6 +16,22 @@ export async function getBots(this: ILoadOptionsFunctions): Promise<INodePropert
 	});
 }
 
+export async function getBotParams(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+	const responseData = await bcApiRequest.call(
+		this,
+		'GET',
+		'/api/v2/activity/' + this.getNodeParameter('activityLabel'),
+	);
+
+	const parametersItems = responseData as { parameters: [{ label: string, type: string, required: boolean }] };
+	return parametersItems.parameters.map((item) => {
+		const name = item.label;
+		const description = `type: ${item.type}, required: ${item.required ? 'YES' : 'NO'}`;
+		const value = item.label;
+		return {name, description, value};
+	});
+}
+
 export async function getAllDatapools(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 	const responseData = await bcApiRequestAllItems.call(
 		this,

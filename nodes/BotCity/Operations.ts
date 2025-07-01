@@ -64,13 +64,43 @@ export const Operations: INodeProperties[] = [
 				},
 			},
 			{
-				name: 'Get Many',
-				value: 'getMany',
-				action: 'Get many executions details',
+				name: 'List all executions',
+				value: 'getAll',
+				action: 'Get all executions details',
 				routing: {
 					request: {
 						method: 'GET',
 						url: '/api/v2/task',
+						qs: {
+							size: 1000,
+						}
+					},
+					output: {
+						postReceive: [
+							{
+								type: 'rootProperty',
+								properties: {
+									property: 'content',
+								},
+							},
+
+						],
+					},
+					operations: {
+						pagination: {
+							type: 'generic',
+							properties: {
+								continue: '={{ !$response.body.last }}',
+								request: {
+									qs: {
+										page: '={{ parseInt(($response.body.number ?? 0) + 1) }}',
+									}
+								}
+							}
+						},
+					},
+					send: {
+						paginate: false, // Disabled due 'Days' parameter not working
 					},
 				},
 			},
@@ -123,14 +153,19 @@ export const Operations: INodeProperties[] = [
 					},
 					operations: {
 						pagination: {
-							type: 'offset',
+							type: 'generic',
 							properties: {
-								limitParameter: 'size',
-								offsetParameter: 'page',
-								pageSize: 20,
-								type: 'query',
-							},
-						},
+								continue: '={{ !$response.body.last }}',
+								request: {
+									qs: {
+										page: '={{ parseInt(($response.body.number ?? 0) + 1) }}',
+									}
+								}
+							}
+						}
+					},
+					send: {
+						paginate: true,
 					},
 				},
 			},
@@ -160,3 +195,4 @@ export const Operations: INodeProperties[] = [
 		default: 'addItem',
 	},
 ];
+
